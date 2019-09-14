@@ -1,0 +1,55 @@
+<body>
+
+  <button id="btn">Agregar</button>
+
+  <div id="contAgregar" class="contenedor" hidden>
+      <button id="btnCerrar" class="cerrar">x</button>
+      <br>
+      <br>
+      <label for="fname">Nombre</label>
+      <br>
+      <input type="text" id="fname" class="sinError" name="firstname" placeholder="Tu nombre..">
+      <br>
+      <label for="lname">Apellido</label>
+      <br>
+      <input type="text" id="lname" class="sinError" name="lastname" placeholder="Tu apellido..">
+      <br>
+
+      <input type="button" value="Guardar" >
+   
+  </div>
+
+<h2>Lista de personas</h2>
+<table id="tabla">
+    <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Accion</th>
+  </tr>
+</thead>
+<tbody id="tCuerpo">
+  <tr>
+    <td>Peter</td>
+    <td>Griffin</td>
+    <td><a href="">borrar</a></td>
+  </tr>
+  <tr>
+    <td>Lois</td>
+    <td>Griffin</td>
+    <td><a href="">borrar</a></td>
+  </tr>
+  <tr>
+    <td>Joe</td>
+    <td>Swanson</td>
+    <td><a href="" >borrar</a></td>
+  </tr>
+  <tr>
+    <td>Cleveland</td>
+    <td>Brown</td>
+    <td><a href="" onclick="tagA(event)">borrar</a></td>
+</tr>
+</tbody>
+</table>
+
+</body>

@@ -1,0 +1,17 @@
+Posicionamiento:
+
+1 - margin "auto" centra en el medio, los margenes de costado son iguales
+2 - margin 20px "auto" abajo izquierda
+3 - position : static --> valor por defecto de todas las cajas de componentes
+    position: relative --> si tengo 2 divs de position relative los puedo superponer
+4 - div con position relative padre con un hijo de position absolute
+5 - pòsition: fixed --> Anclado a la pantalla
+
+Flex: Que una aplicacion sea responsive "display: flex" que el contenedor sea flexible y se adapte
+
+flex-direction: Propiedad por defecto es "row", pero hay "row-reverse", "column" y "column-reverse"
+justify-content: Propiedad por defecto "flex-start", pero hay "flex-end", "center", "space-between" y "space-around"
+align-items: propiedad por defecto "stretch", pero hay "flex-start", "center", "flex-end" y "baseline"
+flex-wrap: propiedad que ajusta a medida quu cambia el tamaño de la pantalla, mantienen los px pero lo tira para abajo
+
+"flex-grow"+num unica propiedad que aplica a los child

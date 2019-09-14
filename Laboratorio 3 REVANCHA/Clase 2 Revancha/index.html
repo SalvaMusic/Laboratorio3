@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculadora</title>
+    <script src = "JScript/JScript.js">
+        //alert(document.getElementById("user").type)                
+        //var nombre;
+        //nombre = "Hola!!";
+        //alert(nombre);
+    </script>
+    <!-- <link rel="stylesheet" href="./estilos.css"> -->
+</head>
+<body>
+    <h1>
+        Calculadora
+    </h1>
+    <br>
+    <fieldset>
+                <legend> <b>Sumar numeros</b></legend>
+                Se debe ingresar 2 numeros y hacer click con el Boton sumar para ver el resultado.
+                <br>
+                <input id = "num1" class = "num1" type="number" name = "inNum1">
+                <label class="negrita">+</label>
+                <input id = "num2" class = "num2" type="number" name = "inNum2">
+                <input id = "btnSum" class = "verde" type="button" name = "btnSumar" value = "Sumar">
+                <input id = "btnSumGuar" class = "rojo" type="button" name = "btnSumarGuardar" value = "Sumar y Guardar"><br>
+                <hr>
+                Resultado: <input id = "result" type="number" name = "inResult">
+                <hr>
+                <h2>Historial de Resultados</h2>
+                <table border = "1" id = "table">
+                        <thead>
+                          <th>Numero 1</th>
+                          <th>Numero 2</th>
+                          <th>Resultado</th>
+                        </thead>
+                        <tbody id = "tbody">
+                          <!-- innerHTML-->
+                        
+                        </tbody>
+                        <tfoot>
+            
+                        </tfoot>
+                </table>   
+    </fieldset>
+</body>
+</html>

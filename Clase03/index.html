@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EjemploGrilla</title>
+    <script src = "JS/JScript.js">
+        //alert(document.getElementById("user").type)                
+        //var nombre;
+        //nombre = "Hola!!";
+        //alert(nombre);
+    </script>
+    <link rel="stylesheet" href="CS/estilos.css">
+</head>
+<body>
+    
+    <div id = "contAgregar" class = "cuadro" hidden >
+        
+          <input id = "btnClose" class = "rojo" type = "button" name = "btnCerrar" value = "X" onclick= "cerrar()">
+          <br>
+          <br>
+          
+          <label for = "nom" class="negrita">Nombre:</label>
+          <br>
+          <input id = "nom" class = "sinError" type="text" name = "inNom" placeholder = "Tu nombre...">
+          <br>
+          <br>
+          <label for = "ape" class="negrita">Apellido:</label>
+          <br>
+          <input id = "ape" class = "sinError" type="text" name = "inApe" placeholder= "Tu apellido...">
+          <br>
+          <br>
+          <input id = "btnGua" class = "verde" type="button" name = "btnGuardar" value = "Guardar">
+          <br>
+          <br>
+    </div>
+    <input id = "btnAgregar" type="button" value="Agregar" onclick= "mostrar()";  >
+        <!-- <input id = "btnAgree" class = "verde" type = "button" name = "btnAgregar" value = "Agregar">    -->
+        <h2 class = "negrita">Lista de Personas</h2>
+        <table border = "0" id = "table" class = "tabla">
+            <thead>
+                 <th class = "th">Nombre</th>
+                 <th class = "th">Apellido</th>
+                 <th class = "th">Accion</th>
+            </thead>
+            <tbody id = "tbody">
+                 <!-- 
+                 innerHTML
+                 <tr>
+                     <td>Diego</td>
+                     <td>Dipietro</td>
+                     <td>links</td>
+                 </tr>
+                  -->
+            </tbody>
+            <tfoot>
+    
+            </tfoot>
+        </table>    
+</body>
+</html>
