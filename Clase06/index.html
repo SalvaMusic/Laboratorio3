@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EjemploGrilla</title>
+    <script src = "JS/JScript.js">
+
+    </script>
+    <link rel="stylesheet" href="CS/estilos.css">
+</head>
+<body>
+    <div id = "contAgregar" class = "cuadro" hidden >
+        
+          <input id = "btnClose" class = "rojo" type = "button" name = "btnCerrar" value = "X" onclick= "cerrar()">
+          <br><br>
+          <label for = "nom" class="negrita">Nombre:</label><br>
+          <input id = "nom" class = "sinError" type="text" name = "inNom" placeholder = "Tu Nombre..."><br>
+          <label for = "ape" class="negrita">Apellido:</label><br>
+          <input id = "ape" class = "sinError" type="text" name = "inApe" placeholder= "Tu Apellido..."><br>
+          <label for = "tel" class="negrita">Teléfono:</label><br>
+          <input id = "tel" class = "sinError" type="text" name = "inTel" placeholder= "Tu Telefono..."><br>
+          <label for = "fec" class="negrita">Fecha Nacimiento:</label><br>
+          <input id = "fec" class = "sinError" type="text" name = "inFec" placeholder= "Tu Fecha de Nacimientoo..."><br>
+          <input id = "btnGua" class = "verde" type="button" name = "btnGuardar" value = "Guardar"><br><br>
+    </div>
+    <input id = "btnAgregar" type="button" value="Agregar" onclick= "mostrar()";  >
+        <!-- <input id = "btnAgree" class = "verde" type = "button" name = "btnAgregar" value = "Agregar">    -->
+        <h2 class = "negrita">Lista de Personas</h2>
+        <table border = "0" id = "table" class = "tabla">
+            <thead>
+                 <th class = "th">Nombre</th>
+                 <th class = "th">Apellido</th>
+                 <th class = "th">Fecha</th>
+                 <th class = "th">Teléfono</th>
+                 <th class = "th">Accion</th>
+            </thead>
+            <tbody id = "tbody">
+                 
+            </tbody>
+            <tfoot>
+    
+            </tfoot>
+        </table>    
+</body>
+</html>
