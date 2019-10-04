@@ -1,0 +1,39 @@
+div p{
+    background: #000000;
+    color: #ffffff;
+    width: 50%;
+}
+
+/*h2 {
+    color: red;
+}
+
+p a {
+    color: brown;
+
+}
+
+.green {
+    color:green;
+}*/
+
+/*Todo el documento*/
+/*
+body 
+{
+
+    Unidades de medida absoluta
+    la unidad de medida por defecto en el body es de 16px
+    font-size: 16cm;
+    font-size: 16mm;
+    font-size: 16in;
+    Unidades de medida relativa
+    font-size: 16px;
+    font-size: 16em;
+    font-size: 16rem;
+}*/
+/*
+p {
+    /*1 em equiale al tamaño del bodi
+    font-size: 1em
+}*/
