@@ -1,4 +1,4 @@
-window.addEventListener("load",function(){
+/*window.addEventListener("load",function(){
     var btn = $("btnGua");
     //var btnAgregar = $("btnAgree");
     //var btnCerrar = $("btnClose");
@@ -8,28 +8,30 @@ window.addEventListener("load",function(){
     //btnCerrar.addEventListener("click",Cerrar);
     //btnAgregar.hidden = false;
  
-})
+})*/
 
-function mostrarPOST()
+function enviarPOST()
     {
-        var name = $("nom");
-        var lastName = $("ape");
-        var fecha = $("fec");
-        var tel = $("tel");
+        var email = $("email");
+        var pass = $("pass");
         var http = new XMLHttpRequest();
-        var jsonString = {"nombre":name.value,"apellido":lastName.value,"fecha":fecha.value,"telefono":tel.value};
+        var jsonString = {"email":email.value,"password":pass.value,};
 
         http.onreadystatechange = function() {
             if (http.readyState === 4)  {
                 if(http.status === 200)  {
                 console.log(http.responseText);
+                var json = JSON.parse(http.responseText);
+                    if(json["autenticado"] === "si")  {
+                        window.location.replace("index.html?email=email&pass=pass");
+                    }
                 }
             }
         }
-
-        http.open("POST","http://localhost:3000/nuevaPersona");
+        
+        http.open("POST","http://localhost:1337/login");
         //Tipo en el que viaja la información
-        http.setRequestHeader("Content-type","application/Json");
+        //http.setRequestHeader("Content-type","application/Json");
         http.send(JSON.stringify(jsonString));
  
     }
@@ -56,6 +58,15 @@ function mostrarGET()
         http.send();
  
     }
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }   
 
 
 function Guardar()
