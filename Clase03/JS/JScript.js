@@ -55,7 +55,8 @@ function editar(e)
         document.getElementById("contAgregar").hidden = false;
         
     }
-    e.borrar();
+    var padre = e.parentNode;
+    padre.removeChildren(e);
     e.Guardar();
     
 }

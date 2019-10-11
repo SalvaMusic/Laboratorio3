@@ -2,27 +2,45 @@
     <head>
         <meta charset="UTF-8">
         <title>Bienvenidos</title>
-        <script type="text/javascript" src="./JScript.js"></script>
+        <script type="text/javascript" src="JS/JScript.js"></script>
+        <link rel="stylesheet" href="CSS/estilos.css">
     </head>
-    <body>
+    <body id="body">
         <header>
             <!--div Permite agregar contenido-->
-            <div>
-                <!--<img src="./images/imagen.jpg" width="70" alt="Logotipo"> -->
-            </div>
+            <!--<div>
+                <img src="images/imagen.jpg" width="700" alt="Logotipo">
+            </div>-->
             <!-- Menu -->
+           
             <nav>
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">Sample Post</a>
-                <a href="#">Contact</a>
-                <a href="#">New Post</a>
-                
-            </nav>
+                <a href="#">HOME</a>
+                <a href="#">ABOUT</a>
+                <a href="#">SAMPLE POST</a>
+                <a href="#">CONTACT</a>
+                <a id="newPost" href="#">NEW POST</a>
+            </nav> 
+            <h3 id="cabecera">UTN FRA - Labo III</h3>
+            <div id="divHeader">
+                <h1>Blog Application <br/>____</h1>
+                <h3>A Blog Application by UTN FRA - Labo III</h3>
+            </div>
         </header>
-        <div id="divPost" hidden>
-            
-        </div>
+        <section id="section">
+            <div>
+                <h3>LIBRETA UNIVERSITARIA</h3>
+                <h4>Hasta el viernes 11/10 se tramitará en Secretaría</h4>
+                <p>Los alumnos deben presentar el formulario de solicitud junto a las 2 fotos 4x4.</p>
+                <p class="piePost">Posted by UTN FRA - Labo III on September 18, 2014</p>
+            </div>            
+            <div>
+                <h3>INSCRIPCION A FINALES</h3>
+                <h4>A partir del 24/6 abrimos la inscripción a los exámenes finales de Julio.</h4>
+                <p>Concurrir con Libreta Universitaria y última chequera de pagos con 24 hs de antelación a la fecha del examen como tiempo máximo de inscripción.</p>
+                <p class="piePost">Posted by UTN FRA - Labo III on September 18, 2014</p>
+            </div>
+        </section>
+        <div id="divPost" hidden></div>
 
     </body>
 </html>

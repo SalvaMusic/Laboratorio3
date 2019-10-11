@@ -1,0 +1,106 @@
+body {
+    font-family:Arial;
+    margin: 0%;
+}
+
+header {
+    color: white;
+    background-image: url(../images/imagen.jpg);
+    position: relative;
+    background-position-y: 40%;
+    background-size: 50%;
+    height: 500px;
+}
+
+/*
+header::before{
+    content:'';
+	position: absolute;
+    top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.3);
+}*/
+
+#divHeader{
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(0,0,0,0.3);
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+}
+h1{
+    font-size: 5rem;
+    line-height: 0.6rem;
+}
+
+
+nav {
+    background-color: rgba(0,0,0,0.3);
+    position: absolute;
+    right: 0px;    
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 15px 20px;
+    font-weight:bold;
+}
+
+a:hover {
+    background:  rgb(0, 161, 236);
+}
+
+a:active {
+    background:  rgb(0, 115, 168);
+}
+
+#cabecera {
+    color: #000000;
+    padding: 15px 20px;
+    font-weight:bold;
+}
+
+#divPost{
+    padding: 1rem;
+    background-color: white;
+    width: 20%; 
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+body section div {
+    margin: 0.5 rem;
+    padding: 2rem;
+    display: inline-block;
+    width: 45%;
+
+}
+
+body section div h3{
+    font-size: 2rem;
+}
+
+body section div h4{
+    font-size: 1rem;
+}
+
+.piePost{
+    text-align: center;
+    color: grey;
+    font-size: 0.8rem;
+}
+
+#section{
+    margin: 1% 5%;
+}
