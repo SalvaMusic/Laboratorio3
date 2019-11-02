@@ -1,4 +1,4 @@
-$("document").ready(function(){
+$(document).ready(function(){
     
 /*})
 suplanto -----> window.addEventListener("load",function(){*/
@@ -25,24 +25,6 @@ suplanto -----> window.addEventListener("load",function(){*/
 
     $("#txt").val("Nuevo valor");
 })
-/*
-$.get("http.....", function(data, status){
-    for(var i= 0; i<data.lenght;i++)
-    {
-        console.log(data[i]);
-    }
-    
-})
-
-
-$.post("http.....",
-    {
-       //Objeto Json 
-        }, function(data, status){
-    
-    
-})
-*/
 
 function saludar()
 {

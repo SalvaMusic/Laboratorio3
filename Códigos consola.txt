@@ -1,0 +1,18 @@
+---Levantar servidor--------------------
+
+$ node server.js
+
+
+----instalar npm-----------------------
+npm init -y
+
+----instalar jqery----
+npm install jquery --save --6
+
+----instalar bootstrap----
+npm install bootstrap --save --6
+
+----
+npm install
+
+---------------------------------------
