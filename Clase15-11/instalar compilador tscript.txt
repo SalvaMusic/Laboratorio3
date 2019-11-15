@@ -1,0 +1,6 @@
+npm install -g tsc
+
+
+tsc ./Practica1.ts -w
+
+tsc ./*.ts -w
