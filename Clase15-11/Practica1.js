@@ -3,18 +3,17 @@ var batman = "Bruce";
 var superman = "Clark";
 var existe = false;
 // Tuplas
-var parejaHeroes;
-var _a = void 0, batman = _a[0], superman = _a[1];
+var parejaHeroes = [batman, superman];
 var villano = ["Lex Lutor", 5, true];
 // Arreglos
 var aliados = ["Mujer Maravilla", "Acuaman", "San", "Flash"];
 //Enumeraciones
 var fuerzas;
 (function (fuerzas) {
-    fuerzas[fuerzas[5] = 0] = 5;
-    fuerzas[fuerzas[100] = 1] = 100;
-    fuerzas[fuerzas[1] = 2] = 1;
-    fuerzas[fuerzas[0] = 3] = 0;
+    fuerzas[fuerzas["fuerzaFlash"] = 5] = "fuerzaFlash";
+    fuerzas[fuerzas["fuerzaSuperman"] = 100] = "fuerzaSuperman";
+    fuerzas[fuerzas["fuerzaBatman"] = 1] = "fuerzaBatman";
+    fuerzas[fuerzas["fuerzaAcuaman"] = 0] = "fuerzaAcuaman";
 })(fuerzas || (fuerzas = {}));
 // Retorno de funciones
 function activar_batiseñal() {

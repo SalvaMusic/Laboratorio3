@@ -28,8 +28,6 @@ var villanos = [{
         edad: undefined,
         mutante: true
     }];
-// Multiples tipos
-// cree dos tipos, uno para charles y otro para apocalipsis
 var charles = {
     poder: "psiquico",
     estatura: 1.78
