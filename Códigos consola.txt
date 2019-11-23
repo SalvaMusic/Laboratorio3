@@ -16,3 +16,17 @@ npm install bootstrap --save --6
 npm install
 
 ---------------------------------------
+
+***** TYPESCRIPT *****
+
+npm install -g tsc
+
+
+tsc ./Practica1.ts -w
+
+tsc ./*.ts -w
+
+
+---
+
+npm install -- save @types/jquery
