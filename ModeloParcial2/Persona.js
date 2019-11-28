@@ -1,6 +1,6 @@
 var entidades;
 (function (entidades) {
-    var Persona = (function () {
+    var Persona = /** @class */ (function () {
         function Persona(id, name, lastname, age) {
             this.id = id;
             this.name = name;
@@ -8,6 +8,6 @@ var entidades;
             this.age = age;
         }
         return Persona;
-    })();
+    }());
     entidades.Persona = Persona;
 })(entidades || (entidades = {}));
