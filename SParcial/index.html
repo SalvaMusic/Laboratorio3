@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>2do Parcial</title>
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="Vehiculo.js"></script>
+        <script type="text/javascript" src="Auto.js"></script>
+        <script type="text/javascript" src="Camioneta.js"></script>
+        <script type="text/javascript" src="functions.js"></script>
+        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+       
+        <div class="container">
+                <h1 class="row justify-content-around divRow">ABM VEICULOS</h1>
+                <hr>
+            <form>        
+            <div class="form-group row">
+                <label for="idInput" class="col-3 col-form-label">ID:</label>
+                <div class="col-12">
+                <input type="text" class="form-control" id="idInput">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="marInput" class="col-3 col-form-label">MARCA:</label>
+                <div class="col-12">
+                <input type="text" class="form-control" id="marInput">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="modInput" class="col-3 col-form-label">MODELO:</label>
+                <div class="col-12">
+                <input type="text" class="form-control" id="modInput">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="preInput" class="col-3 col-form-label">PRECIO:</label>
+                <div class="col-12">
+                <input type="text" class="form-control" id="preInput">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="tipoInput" class="col-3 col-form-label">TIPO:</label>
+                <div class="col-12">
+                    <select name="controlSelect" id="tipoInput" class="form-control">
+                        <option value="Auto">Auto</option>
+                        <option value="Camioneta">Camioneta</option>
+                        
+                    </select>
+                    <div class="form-group row">
+                      <label for="cantInput" class="col-3 col-form-label">CANTIDAD DE PUERTAS:</label>
+                      <div class="col-12">
+                      <input type="text" class="col-1 form-control" id="cantInput" value = "4">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="cantInput" class="col-2 col-form-label">ES 4 X 4:</label>
+                      <input type="checkbox" name="chk1" id="chk1" class="col-3 form-check-input">
+                </div>
+                </div>
+            </div>
+            </form>
+            <div class="form-group">
+                <button class="btn btn-outline-success" onclick=entidades.agregar()>Guardar</button>
+                <button class="btn btn-outline-danger" onclick=entidades.cargarTabla()>Cargar Tabla</button>
+            
+            <hr>
+            
+                <div class="form-group row">
+                    <label for="promInput" class="col-3 col-form-label">Promedio:</label>
+                    <label  class="col-4 col-form-label" id = "promId" value = "4"></label>
+                    <button class="btn btn-outline-primary" onclick=entidades.calcularPromedio()>Calcular Promedio</button>
+                </div>
+                <hr>
+              </div>
+              <hr>
+              <div>
+              
+            <hr>  
+              <h3 class="row justify-content-around divRow">Lista Vehiculos</h3>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>MARCA</th>
+                  <th>MODELO</th>
+                  <th>PRECIO</th>
+                  <th>TIPO</th>
+                  <th>DETALLE</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+              </tbody>
+            </table>
+
+        </div>
+        
+        
+    </body>
+</html>
