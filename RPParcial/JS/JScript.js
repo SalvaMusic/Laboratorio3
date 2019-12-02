@@ -43,42 +43,7 @@ function mostrarGET()
             fila.appendChild(celda);
         }
         tbody.append(fila);
-        
-      /*
-        var tr = document.createElement("tr");
-        var tbI = document.createElement("tb");
-        var tbA = document.createElement("tb");
-        var tbL = document.createElement("tb");
-        var tbS = document.createElement("tb");
-        var tbN = document.createElement("tb");
-        var idNode = document.createElement("p");
-        var nombre = document.createElement("p");
-        var apellido = document.createElement("p");
-        var localidad = document.createElement("p");
-        var sexo = document.createElement("p");
-
-        
      
-        // Agrego atributos a los nodos
-        idNode.innerHTML = id;
-        nombre.innerHTML = nom;
-        apellido.innerHTML = ape;
-        localidad.innerHTML = loc;
-        sexo.innerHTML  = sex;
-        
-        // Agrego los nodos 
-        tbI.appendChild(idNode);
-        tbN.appendChild(nombre);
-        tbA.appendChild(apellido);
-        tbL.appendChild(localidad);
-        tbS.appendChild(sexo);
-        tr.appendChild(tbI);
-        tr.appendChild(tbN);
-        tr.appendChild(tbA);
-        tr.appendChild(tbL);
-        tr.appendChild(tbS);
-
-        tbody.append(tr);*/
         $("#table").append(tbody);
     }
 
