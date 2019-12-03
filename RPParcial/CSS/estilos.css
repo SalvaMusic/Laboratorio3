@@ -1,11 +1,16 @@
 
+body{
+    font: 100% Arial;
+}
+
 .tabla
 {
     width: 100%;
     text-align: center;
     padding: 8px;
     border-collapse: collapse;
-  
+    border-bottom: 2px  rgb(0, 61, 131);
+
 }
 
 tbody
@@ -23,8 +28,16 @@ tbody
     background-color: rgb(0, 61, 131);
     color: white;
 }
-tr{
-    height: 40px;
+
+#divTab{
+    margin: 5px;
     
 }
 
+tr{
+    height: 40px;
+}
+
+tr:nth-child(even){
+    background-color: lightgray;
+}

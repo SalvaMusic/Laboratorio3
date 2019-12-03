@@ -1,8 +1,5 @@
 window.addEventListener("load",function(){
-
     mostrarGET();
-    
-
 })
 
 
@@ -60,7 +57,7 @@ function mostrarGET()
 
 function modificar(e)
 {
-    console.log(e.target.parent.innerHTML);
+    console.log(e.target.parent);
     
 }
 function editar(e)
@@ -104,9 +101,14 @@ function editar(e)
         // btnModificar.setAttribute("id","btnClosed");
         btnModificar.addEventListener("click", modificar);
         txtNombre.setAttribute("type", "text");
+        txtNombre.setAttribute("id", "txtNom");
         txtApellido.setAttribute("type", "text");
+        txtApellido.setAttribute("id", "txtApe");
         rSexoM.setAttribute("type", "radio");
+        rSexoM.setAttribute("id", "sexM");
         rSexoF.setAttribute("type", "radio");
+        rSexoF.setAttribute("id", "sexF");
+
             
         // Agrego los nodos a al div
             
@@ -134,17 +136,15 @@ function editar(e)
         $("body").appendChild(div);
     }
 
-    console.log(e.target.children[0].innerHTML);
-    console.log(e.target.children[1].innerHTML);        
-    console.log(e.target.children[2].innerHTML);
-    txtNombre.value = e.target.children[0].innerHTML;
-    txtApellido.value = e.target.children[1].innerHTML;
+
+    $("txtNom").value = e.target.children[0].innerHTML;
+    $("txtApe").value = e.target.children[1].innerHTML;
     if(e.target.children[2].innerHTML == "Female")
     {
-        rSexoF.checked = true;
+        $("sexF").checked = true;
     }else
     {
-        rSexoM.checked = true;
+        $("sexM").checked = true;
     }
         
     div.hidden = false;
@@ -153,6 +153,8 @@ function editar(e)
 
 function cerrar()
 {
+    $("sexF").checked = false;
+    $("sexM").checked = false;
     $("cuadro").hidden = true;
 }
 
