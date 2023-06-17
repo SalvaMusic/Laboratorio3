@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body{
+			background-color: rgb(127, 214, 230);
+		}
+
+		#contenedorCarga{
+			background-color: rgba(127, 214, 230, 0.9);
+			height: 100%;
+			width: 100%;
+			position: fixed;
+			z-index: 10000;
+		}
+
+		#cargar{
+			border: 15px solid #ccc;
+			border-top-color: #f4266a;
+			border-top-style: groove;
+			height: 100px;
+			width: 100px;
+			border-radius: 100%;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+			-webkit-animation: girar 1.5s linear infinite;
+			-o-animation: girar 1.5s linear infinite;
+			animation: girar 1.5s linear infinite;
+		}
+
+		@keyframes girar {
+			from { transform: rotate(0deg);}
+			to { transform: rotate(360deg);}
+		}
+
+		*{
+			font-family: "sans serif";
+			align-items: center;
+			text-align: center;
+		}
+
+		.flex{
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			gap: 10px;
+		}
+
+		#divColumnas,p,#btnAgregar{
+			margin: 5px;
+		}
+
+		#mostrarCol{
+			margin-top: 20px;
+		}
+
+		table,th,td{
+			border: 2px solid black;
+			border-collapse: collapse;
+			padding: 2px 5px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#lstTipo,#inputEdadPromedio,#btnEdadPromedio,#btnAgregar,#btnAlta,#btnModificar,#btnEliminar,#btnCancelar,#lstTipoABM{
+			height: 30px;
+		}
+
+		.tHead{
+			cursor: default;
+			background-color: rgb(43, 97, 199);
+			color: #ffffff;
+			text-anchor: middle;
+		}
+
+		.tBody{
+			cursor: default;
+			background-color: LightBlue;
+		}
+
+		input{
+			cursor: pointer;
+		}
+
+		tr:hover td{
+			background-color: LightCyan;
+		}
+	</style>
+	<script>
+		class Vehiculo {
+    		id;
+			modelo;
+			anoFab;
+			velMax;
+
+			constructor(id, modelo, anoFab, velMax) {
+				this.id = id;
+				this.modelo = modelo;
+				this.anoFab = anoFab;
+				this.velMax = velMax;
+			}
+		}
+
+		class Aereo extends Vehiculo {
+			altMax;
+			autonomia;
+
+			constructor(id, modelo, anoFab, velMax, altMax, autonomia) {
+				super(id, modelo, anoFab, velMax);
+				this.altMax = altMax;
+				this.autonomia = autonomia;
+			}
+		}
+
+		class Terrestre extends Vehiculo {
+			cantPue;
+			cantRue;
+
+			constructor(id, modelo, anoFab, velMax, cantPue, cantRue) {
+				super(id, modelo, anoFab, velMax);
+				this.cantPue = cantPue;
+				this.cantRue = cantRue;
+			}
+		}
+
+		const $ = (id) => document.getElementById(id);
+
+		function fetchData() {
+			fetch('http://localhost/vehiculoAereoTerrestre.php')
+				.then(res => {
+					if (res.ok && res.status == 200) {
+						return res.json();
+					}
+					else {
+						console.log("No se pudo cargar la lista");
+					}
+				})
+				.then(data => {
+					parsear(data);
+				})
+				.catch((error) => {
+					console.error(error);
+				})
+		};
+
+		fetchData();
+
+		var listaVehiculos = [];
+
+
+		function parsear(cadenaConvertir) {
+			cadenaConvertir.map((elemento) => {
+				if ((typeof elemento.cantPue == 'undefined' && typeof elemento.cantRue == 'undefined')) {
+					listaVehiculos.push(new Aereo(elemento.id, elemento.modelo, elemento.anoFab, elemento.velMax, elemento.altMax, elemento.autonomia));
+				}
+				else if ((typeof elemento.altMax == 'undefined' && typeof elemento.autonomia == 'undefined')) {
+					listaVehiculos.push(new Terrestre(elemento.id, elemento.modelo, elemento.anoFab, elemento.velMax, elemento.cantPue, elemento.cantRue));
+				}
+			});
+			crearTabla(listaVehiculos);
+			parar();
+		}
+
+
+		function crearTabla() {
+			let tbody = $("tbody");
+			let tr = document.createElement("tr");
+
+			limpiarTabla();
+
+			if (!tbody.childElementCount > -1) {
+				listaVehiculos.forEach(element => {
+					cargarCampos(element);
+				});
+			}
+		}
+
+		function cargarCampos(element) {
+			let tbody = $("tbody");
+			let newRow = tbody.insertRow();
+
+			let id = newRow.insertCell(-1);
+			let modelo = newRow.insertCell(-1);
+			let anoFab = newRow.insertCell(-1);
+			let velMax = newRow.insertCell(-1);
+			let altMax = newRow.insertCell(-1);
+			let autonomia = newRow.insertCell(-1);
+			let cantPue = newRow.insertCell(-1);
+			let cantRue = newRow.insertCell(-1);
+			let modificar = newRow.insertCell(-1);
+			let eliminar = newRow.insertCell(-1);
+
+			crearBoton(modificar, "Modificar", element);
+			crearBoton(eliminar, "Eliminar", element);
+
+			id.appendChild(document.createTextNode(element.id));
+			modelo.appendChild(document.createTextNode(element.modelo));
+			anoFab.appendChild(document.createTextNode(element.anoFab));
+			velMax.appendChild(document.createTextNode(element.velMax));
+
+			if (element instanceof Aereo) {
+				altMax.appendChild(document.createTextNode(element.altMax));
+				autonomia.appendChild(document.createTextNode(element.autonomia));
+				cantPue.appendChild(document.createTextNode("N/A"));
+				cantRue.appendChild(document.createTextNode("N/A"));
+			} else if (element instanceof Terrestre) {
+				altMax.appendChild(document.createTextNode("N/A"));
+				autonomia.appendChild(document.createTextNode("N/A"));
+				cantPue.appendChild(document.createTextNode(element.cantPue));
+				cantRue.appendChild(document.createTextNode(element.cantRue));
+			}
+		}
+
+		function crearBoton(referencia, tipo, elemento) {
+
+			let btn = document.createElement('input');
+			btn.type = "button";
+			btn.id = tipo + elemento.id;
+			btn.value = tipo;
+			btn.onclick = () => {
+				if (tipo == "Modificar") {
+					let objAux = { id: elemento.id, modelo: elemento.modelo, anoFab: elemento.anoFab, velMax: elemento.velMax, altMax: elemento.altMax, autonomia: elemento.autonomia, cantPue: elemento.cantPue, cantRue: elemento.cantRue };
+					btnAlta.onclick = () => { modificar(); simularEspera(); }
+					cargarABM(id = elemento.id, modelo = elemento.modelo, anoFab = elemento.anoFab, velMax = elemento.velMax, altMax = elemento.altMax, autonomia = elemento.autonomia, cantPue = elemento.cantPue, cantRue = elemento.cantRue, titulo = "Modificar Elemento");
+				}
+				else if (tipo == "Eliminar") {
+					btnAlta.onclick = () => { simularEspera(); eliminarObj(); };
+					cargarABM(id = elemento.id, modelo = elemento.modelo, anoFab = elemento.anoFab, velMax = elemento.velMax, altMax = elemento.altMax, autonomia = elemento.autonomia, cantPue = elemento.cantPue, cantRue = elemento.cantRue, titulo = "Eliminar Elemento");
+				}
+			};
+			referencia.appendChild(btn);
+		}		
+
+		function cargarABM(id = "", modelo = "", anoFab = "", velMax = "", altMax = "", autonomia = "", cantPue = "", cantRue = "", titulo = "Agregar Elemento") {
+			$("inputTitulo").innerHTML = titulo
+			$("formDatos").style.display = "none";
+			$("divAbm").style.display = "";
+			$("inputId").value = id;
+			$("inputModelo").value = modelo;
+			$("inputAnoFab").value = anoFab;
+			$("inputvelMax").value = velMax;
+
+			if (cantPue == "" && cantRue == "") {
+				CambiarlstTipoABM("Aereo", altMax, autonomia);
+			} else {
+				CambiarlstTipoABM("Terrestre", cantPue, cantRue);
+			}
+		}
+
+		function CambiarlstTipoABM(tipo, c1, c2) {
+			$("lstTipoABM").value = tipo;
+			$("inputAux1").value = c1;
+			$("inputAux2").value = c2;
+
+			if ("Terrestre" == tipo) {
+				$("labelAux1").innerHTML = "Cant. Puertas: ";
+				$("labelAux2").innerHTML = "Cant. Ruedas: ";
+			} else {
+				$("labelAux1").innerHTML = "Altura Max: ";
+				$("labelAux2").innerHTML = "Autonomia: ";
+			}
+		}
+
+		function limpiarTabla() {
+			let table = $("table");
+			let tamanio = table.rows.length;
+
+			for (let i = 1; i < tamanio; i++) {
+				table.deleteRow(1);
+			}
+		}
+
+		function getColumn(col) {
+			let table = $("table");
+			let rLen = table.rows.length;
+			let paso = false;
+
+			if (col < 0) {
+				return null;
+			}
+
+			for (i = 0; i < rLen; i++) {
+				tr = table.rows[i];
+				if (tr.cells.length > col) {
+					td = tr.cells[col];
+
+					if (td.style.display == "none") {
+						td.style.display = "";
+						if (!paso) {
+							arraySeVeColumna[col] = true;
+							paso = true;
+						}
+					}
+					else {
+						td.style.display = "none";
+
+						if (!paso) {
+							arraySeVeColumna[col] = false;
+							paso = true;
+						}
+					}
+				}
+			}
+			crearTabla();
+		}
+
+
+		let thId = $("thId");
+		let thModelo = $("thModelo");
+		let thAnoFab = $("thAnoFab");
+		let thVelMax = $("thVelMax");
+		let thAltMax = $("thAltMax");
+		let thAutonomia = $("thAutonomia");
+		let thCantPue = $("thCantPue");
+		let thCantRue = $("thCantRue");
+
+		function alta() {
+			let lstTipoABM = $("lstTipoABM");
+			let id = $("inputId").value;
+			let modelo = $("inputModelo").value;
+			let anoFab = $("inputAnoFab").value;
+			let velMax = $("inputvelMax").value;
+			let aux1 = $("inputAux1").value;
+			let aux2 = $("inputAux2").value;
+			let vehiculoAux;
+
+			velMax = parseInt(velMax);
+
+			if (!(modelo == "" || anoFab == "" || !(Number.isInteger(velMax)) || aux1 == "" || aux2 == "")) {
+				aux1 = parseInt(aux1);
+				aux2 = parseInt(aux2);
+
+				if (lstTipoABM.value == "Aereo") {
+					if (Number.isInteger(aux2) && Number.isInteger(aux1) && aux1 > 0 && aux2 > 0) {
+						vehiculoAux = new Aereo(null, modelo, anoFab, velMax, aux1, aux2);
+						simularEspera();
+						crearObj(vehiculoAux);
+					} else {
+						alert("altMax y autonomia deben ser mayores a 0");
+					}
+				} else {
+					if (Number.isInteger(aux2) && Number.isInteger(aux1) && aux1 > 0 && aux2 > 0) {
+						vehiculoAux = new Terrestre(null, modelo, anoFab, velMax, aux1, aux2);
+						simularEspera();
+						crearObj(vehiculoAux);
+					} else {
+						alert("cantPue y cantRue deben ser mayores a 0");
+					}
+				}
+			} else {
+				alert("No estan todos los campos completos o velMax no es un numero")
+			}
+		}
+
+
+		function getVehiculo() {
+			let lstTipoABM = $("lstTipoABM");
+			let id = parseInt($("inputId").value);
+			let modelo = $("inputModelo").value;
+			let anoFab = $("inputAnoFab").value;
+			let velMax = $("inputvelMax").value;
+			let aux1 = $("inputAux1").value;
+			let aux2 = $("inputAux2").value;
+			let nuevo;
+
+			velMax = parseInt(velMax);
+			aux1 = parseInt(aux1);
+			aux2 = parseInt(aux2);
+
+			if (lstTipoABM.value == "Aereo") {
+				if (Number.isInteger(aux1) && aux1 > 0 && Number.isInteger(aux2) && aux2 > 0) {
+					nuevo = new Aereo(id, modelo, anoFab, velMax, aux1, aux2);
+				}
+				else {
+					alert("altMax y autonomia deben ser mayores a 0");
+				}
+			} else {
+				if (Number.isInteger(aux1) && aux1 > 0 && Number.isInteger(aux2) && aux2 > 0) {
+					nuevo = new Terrestre(parseInt(id), modelo, anoFab, velMax, aux1, aux2);
+				}
+				else {
+					alert("cantPue y cantRue deben ser mayores a 0");
+				}
+			}
+
+			return nuevo;
+			
+		}
+
+		
+
+		function cancelar() {
+			$("divAbm").style.display = "none";
+			$("formDatos").style.display = "";
+		}
+
+		function eliminar() {
+			let id = $("inputId").value;
+			let indiceReemplazar = listaVehiculos.map(e => e.id).indexOf(parseInt(id));
+
+			if (indiceReemplazar != -1) {
+				listaVehiculos.splice(indiceReemplazar, 1);
+				crearTabla();
+			}
+			else {
+				alert("No se pudo eliminar");
+			}
+		}
+
+		function parar() {
+			let contenedor = $("contenedorCarga");
+			contenedor.style.display = "none";
+		}
+
+		function simularEspera() {
+			let contenedor = $("contenedorCarga");
+			contenedor.style.display = "";
+
+			setTimeout(function () {
+				contenedor.style.display = "none";
+			}, 3000);
+
+		}
+
+		async function modificar() {
+
+			let id = $("inputId").value;
+			let indiceReemplazar = listaVehiculos.map(e => e.id).indexOf(parseInt(id));
+
+			try {
+				const res = await fetch('http://localhost/vehiculoAereoTerrestre.php', {
+					method: 'POST',
+					mode: 'cors',
+					cache: 'no-cache',
+					credentials: 'same-origin',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					redirect: 'follow',
+					referrerPolicy: 'no-referrer',
+					body: JSON.stringify(listaVehiculos[indiceReemplazar])
+				});
+
+				if (res.ok && res.status == 200) {
+					listaVehiculos[indiceReemplazar] = getVehiculo();
+					crearTabla();
+					cancelar();
+					$("formDatos").style.display = "";
+				}
+				else {
+					alert("No se pudo modificar el objeto - " + res.statusText);
+					cancelar();
+					$("formDatos").style.display = "";
+				}
+			}
+			catch (error) {
+				alert(error);
+			}
+		}
+
+		function eliminarObj() {
+			let p = new Promise(EliminarBaseDeDatos);
+			p.then(exitoDelete)
+				.catch(errorDelete)
+		}
+
+		function EliminarBaseDeDatos(exito, error) {
+			let xhttp = new XMLHttpRequest();
+
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					exito(this.responseText);
+				}
+				if (this.readyState == 4 && this.status == 400) {
+					console.log(this.responseText);
+					error(this.responseText);
+				}
+			};
+			xhttp.open("DELETE", "http://localhost/vehiculoAereoTerrestre.php", true);
+			xhttp.setRequestHeader("Content-type", "application/json");
+			let id = $("inputId").value;
+			let indiceReemplazar = listaVehiculos.map(e => e.id).indexOf(parseInt(id));
+			xhttp.send(JSON.stringify(listaVehiculos[indiceReemplazar]));
+			simularEspera();
+		}
+
+		function catchEliminar(resultado) {
+			alert("No se pudo eliminar el registro");
+			cancelar();
+			$("formDatos").style.display = "";
+			throw resultado;
+		}
+
+		function exitoDelete(resultado) {
+			eliminar();
+			crearTabla();
+			cancelar();
+			$("formDatos").style.display = "";
+		}
+
+		function crearObj(obj) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				if (xhttp.readyState == 4) {
+					if (xhttp.status == 200) {
+						let resp = JSON.parse(xhttp.response);
+						obj.id = resp.id;
+						listaVehiculos.push(obj);
+						crearTabla();
+						cancelar();
+						$("formDatos").style.display = "";
+					} else {
+						alert("No se pudieron recuperar los datos");
+					}
+				}
+			};
+			xhttp.open("PUT", "http://localhost/vehiculoAereoTerrestre.php", true);
+			xhttp.setRequestHeader("Content-type", "application/json");
+			objAux = { ...obj };
+			objAux.id = undefined;
+			xhttp.send(JSON.stringify(objAux));
+			simularEspera();
+		}
+
+		window.addEventListener("load", () => {			
+			var lstTerrestres = false;
+			
+			$("btnAgregar").addEventListener("click", (event) => {
+				$("btnAlta").onclick = () => alta();
+				cargarABM();
+			});
+			
+			
+			let lstTipoABM = $("lstTipoABM");
+			lstTipoABM.addEventListener("change", (event) => {
+				CambiarlstTipoABM(lstTipoABM.value, "", "");
+				lstTerrestres = !lstTerrestres;
+			});
+
+			$("btnCancelar").addEventListener("click", cancelar);
+		});
+
+	</script>
+	<title>Parcial 2</title>
+</head>
+<body id="body">
+	<div id="contenedorCarga">
+		<div id="cargar"></div>
+	</div>
+	
+	<div id="formDatos">	
+		<h2>Formulario Lista</h2>
+		<table id="table">
+			<thead>
+				<tr>
+					<th id="thId" class="tHead">ID</th>
+					<th id="thModelo" class="tHead">Modelo</th>
+					<th id="thAnoFab" class="tHead">AnoFab</th>
+					<th id="thVelMax" class="tHead">VelMax</th>
+					<th id="thAltMax" class="tHead">AltMax</th>
+					<th id="thAutonomia" class="tHead">Autonomia</th>
+					<th id="thCantPue" class="tHead">CantPue</th>
+					<th id="thCantRue" class="tHead">CantRue</th>
+					<th id="thModificar" class="tHead">Modificar</th>
+					<th id="thEliminar" class="tHead">Eliminar</th>
+				</tr>
+			</thead>
+			<tbody id="tbody" class="tBody">
+			</tbody>
+		</table>
+		<button id="btnAgregar" type="button">Agregar Elemento</button>
+	</div>
+	<div id="divAbm" style="display: none;">
+			<h2 id="inputTitulo">Formulario ABM</h2> 
+			<p>ID: <input type="text" id="inputId" readonly/><br>
+			Modelo: <input type="text" id="inputModelo"/><br> 
+			Año Fab: <input type="text" id="inputAnoFab"/> <br>
+			Vel. Max: <input type="text" id="inputvelMax"/> <br>
+			Tipo:  
+			<select name="lstTipoABM" id="lstTipoABM">
+				<option value="Aereo">Aereo</option>
+				<option value="Terrestre">Terrestre</option>
+			</select>
+            </p>
+			<label id="labelAux1">labelAux1: </label><input type="text" id="inputAux1"/> <br>
+			<label id="labelAux2">labelAux2: </label><input type="text" id="inputAux2"/> <br>
+			<br>
+			<button id="btnAlta" type="button">Aceptar</button> 
+			<button id="btnCancelar" type="button">Cancelar</button>
+	</div>
+</body>
+</html>
